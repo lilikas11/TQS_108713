@@ -1,9 +1,17 @@
 package tqs.lab3_2.Service;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
+@Entity
 public class Car{
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long carld;
+
     private String maker;
     private String model;
 
@@ -17,10 +25,12 @@ public class Car{
     }
 
     public boolean equals(Object car){
+        return super.equals(car);
 
     }
 
     public int hashCode(){
+        return super.hashCode();
 
     }
 
@@ -50,8 +60,7 @@ public class Car{
 
     @Override
     public String toString() {
-        // TODO Auto-generated method stub
-        return super.toString();
+        return "Car "+ carld +", Maker: "+ maker +", Model: "+this.model+";";
     }
 
 }

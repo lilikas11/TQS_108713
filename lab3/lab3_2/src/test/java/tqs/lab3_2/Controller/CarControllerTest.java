@@ -18,6 +18,7 @@ import static org.hamcrest.Matchers.*;
 
 import tqs.lab3_2.Controller.*;
 import tqs.lab3_2.Service.*;
+import tqs.lab3_2.Service.CarManagerServiceTest;
 import tqs.lab3_2.data.*;
 
 import java.util.List;
