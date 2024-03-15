@@ -1,5 +1,4 @@
 package tqs.lab4_1;
-
 import static java.lang.invoke.MethodHandles.lookup;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.slf4j.LoggerFactory.getLogger;
@@ -8,36 +7,34 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.slf4j.Logger;
 
-import io.github.bonigarcia.seljup.SeleniumJupiter;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-@ExtendWith(SeleniumJupiter.class)
-public class HelloWorldChromeJupiterTest {
+
+class HelloWorldChromeJupiterTest {
 
     static final Logger log = getLogger(lookup().lookupClass());
 
-    private WebDriver driver = null; 
+    private WebDriver driver;
 
     @BeforeAll
-    static void setupClass() throws Exception{
-        WebDriverManager.firefoxdriver().setup();
+    static void setupClass() {
+        WebDriverManager.chromedriver().clearDriverCache().setup();
     }
 
     @BeforeEach
     void setup() {
-        driver = new FirefoxDriver();
-    }   
+        driver = new ChromeDriver();
+    }
 
     @Test
     void test() {
         // Exercise
         String sutUrl = "https://bonigarcia.dev/selenium-webdriver-java/";
-        driver.get(sutUrl); 
+        driver.get(sutUrl);
         String title = driver.getTitle();
         log.debug("The title of {} is {}", sutUrl, title);
 
