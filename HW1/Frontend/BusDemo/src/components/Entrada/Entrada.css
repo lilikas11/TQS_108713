@@ -1,0 +1,67 @@
+.video-background {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    background-size: cover;
+  }
+  
+  .video {
+    /* Faz com que o vídeo cubra o espaço disponível, preservando sua proporção */
+    object-fit: cover;
+    width: 100vw; /* 100% da largura da viewport */
+    height: 100vh; /* 100% da altura da viewport */
+  }
+  
+  .video-background {
+    position: relative; /* Alterado de 'fixed' para 'relative' para permitir conteúdo sobre o vídeo */
+    min-width: 100%;
+    min-height: 100vh;
+  }
+  
+  .video {
+    width: 100%;
+    height: 100vh;
+    object-fit: cover; /* Garante que o vídeo cubra a tela inteira */
+  }
+  
+  .content {
+    padding: 5%;
+    background-color: #160505a9;
+    border-radius: 10%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #fff; /* Define a cor do texto para branco */
+  }
+  
+  .content h1 {
+    font-size: 2.5rem; /* Ajuste o tamanho do título conforme necessário */
+    margin-bottom: 1rem;
+  }
+  
+  .content p {
+    font-size: 1.2rem; /* Ajuste o tamanho do parágrafo conforme necessário */
+    margin-bottom: 2rem;
+  }
+  
+  .content button {
+    font-size: 1rem;
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: #8d1313; /* Cor de fundo do botão */
+    color: #fff; /* Cor do texto do botão */
+    border: none;
+    border-radius: 5px; /* Arredondamento das bordas do botão */
+    transition: background-color 0.3s ease; /* Transição suave para o hover */
+  }
+  
+  .content button:hover {
+    background-color: #f77474; /* Cor do botão ao passar o mouse */
+  }
+  

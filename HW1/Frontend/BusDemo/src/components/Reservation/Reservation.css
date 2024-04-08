@@ -1,0 +1,66 @@
+/* Estilos gerais */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #000000;
+    color: #dadada;
+    line-height: 1.6;
+}
+
+/* Container principal */
+
+.reservation {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+    background: #97979746;
+    border-radius: 10px;
+    padding: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 52rem; /* Largura fixa */
+    height: 35rem; /* Altura fixa */
+}
+
+.div-estatica {
+    width: 300px; /* Largura fixa */
+    height: 200px; /* Altura fixa */
+    background-color: #f0f0f0; /* Apenas para visualização, pode ser removido ou alterado */
+    border: 1px solid #ccc; /* Apenas para visualização, pode ser removido ou alterado */
+    margin: 20px auto; /* Centraliza a div */
+}
+
+
+/* Estilização dos títulos */
+h2, h3 {
+    color: #ffffff;
+}
+
+/* Estilização dos parágrafos/detalhes da viagem */
+p {
+    margin: 10px 0;
+    line-height: 1.5;
+}
+
+/* Estilização dos campos do formulário */
+input[type="text"], input[type="tel"] {
+    display: block;
+    width: 97.5%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ffffff;
+}
+
+/* Estilização do botão */
+button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin: 20px 0 0 0;
+    background-color: #6b2a2a;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #612323;
+}

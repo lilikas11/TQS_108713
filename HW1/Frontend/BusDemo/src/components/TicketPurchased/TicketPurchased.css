@@ -1,0 +1,41 @@
+.ticket-purchased-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #bbbbbb36;
+  }
+  
+  .ticket-purchased-header {
+    text-align: center;
+    color: #000000;
+  }
+  
+  .ticket-purchased-details {
+    margin: 20px 0;
+    padding: 20px;
+    background-color: rgba(202, 202, 202, 0.253);
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+  
+  .detail-row {
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #c7c7c7;
+  }
+  
+  .detail-label {
+    font-weight: bold;
+    color: #ffffff;
+  }
+  
+  .reservation-id {
+    font-size: 20px;
+    font-weight: bold;
+    color: rgb(110, 118, 223);
+    text-align: center;
+    margin-top: 20px;
+  }
+  
