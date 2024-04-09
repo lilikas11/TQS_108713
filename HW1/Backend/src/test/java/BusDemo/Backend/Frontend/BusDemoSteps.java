@@ -17,6 +17,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -30,7 +31,20 @@ import io.cucumber.java.en.When;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.CoreMatchers.*;
 
+import static io.cucumber.junit.platform.engine.Constants.GLUE_PROPERTY_NAME;
+import static io.cucumber.junit.platform.engine.Constants.PLUGIN_PROPERTY_NAME;
 
+
+import org.junit.platform.suite.api.ConfigurationParameter;
+import org.junit.platform.suite.api.IncludeEngines;
+import org.junit.platform.suite.api.SelectClasspathResource;
+import org.junit.platform.suite.api.Suite;
+
+@Suite
+@IncludeEngines("cucumber")
+@ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "pretty")
+@SelectClasspathResource("BusDemo/Backend/Frontend")
+@ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "BusDemo.Backend.Frontend")
 public class BusDemoSteps {
     static final Logger log = getLogger(lookup().lookupClass());
 
@@ -65,7 +79,6 @@ public class BusDemoSteps {
         WebElement thirdButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("button:nth-child(3)")));
         thirdButton.click();
         log.info("Navegação para a seção de viagens foi clicada.");
-        // Confirme que a navegação ocorreu
         assertThat(driver.getCurrentUrl(), containsString("/viagens")); // Assuma que a URL deve conter '/viagens' após clicar no botão.
     }
     
@@ -74,7 +87,6 @@ public class BusDemoSteps {
         WebElement origemDropdown = wait.until(ExpectedConditions.elementToBeClickable(By.id("origem")));
         origemDropdown.click();
         new Select(origemDropdown).selectByVisibleText(origem);
-        // Confirme que a seleção ocorreu
         assertThat(new Select(origemDropdown).getFirstSelectedOption().getText(), is(origem));
         log.info("Cidade de origem selecionada: " + origem);
     }
@@ -119,50 +131,40 @@ public class BusDemoSteps {
     public void eu_seleciono_a_primeira_viagem_disponivel() {
         WebElement firstTableRowButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("tr:nth-child(1) button")));
         firstTableRowButton.click();
-        // Verifique se alguma ação esperada aconteceu após a seleção da viagem.
         log.info("Primeira viagem disponível selecionada.");
     }
 
     @When("Eu preencho as informações de contato e endereço com {string}, {string}, {string}, {string} e {string}")
     public void eu_preencho_as_informacoes_de_contato_e_endereco_com(String nome, String endereco, String cidade, String numeroTelemovel, String numeroCartaoCredito) {
-        // A lógica seria semelhante para todos os campos, então vamos usar apenas 'nome' como exemplo
         WebElement nameInput = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("form input:nth-of-type(1)")));
         nameInput.clear();
         nameInput.sendKeys(nome);
         assertThat(nameInput.getAttribute("value"), is(equalTo(nome)));
         log.info("Informações de contato e endereço preenchidas: " + nome);
-        // Repita para os outros campos...
+
+        WebElement addressInput = driver.findElement(By.cssSelector("input:nth-child(2)"));
+        addressInput.sendKeys(endereco);
+
+        WebElement cityInput = driver.findElement(By.cssSelector("input:nth-child(3)"));
+        cityInput.sendKeys(cidade);
+
+        WebElement inputElement = driver.findElement(By.cssSelector("input:nth-child(4)"));
+        inputElement.click(); // Este clique pode ser redundante
+        Actions actions = new Actions(driver);
+        actions.doubleClick(inputElement).perform();
+        inputElement.sendKeys(numeroTelemovel);
+
+        WebElement anotherInput = driver.findElement(By.cssSelector("input:nth-child(5)"));
+        anotherInput.click();
+        anotherInput.sendKeys(numeroCartaoCredito);
+
     }
 
     @When("Eu confirmo a reserva")
     public void eu_confirmo_a_reserva() {
         WebElement submitButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("button")));
         submitButton.click();
-        // Verifique alguma condição para confirmar que a reserva foi feita.
         log.info("Reserva confirmada.");
-    }
-
-    @When("Eu volto à HomePage")
-    public void eu_volto_a_home_page() {
-        driver.get("http://localhost:5173/");
-        assertThat(driver.getCurrentUrl(), is(equalTo("http://localhost:5173/")));
-        log.info("Retornado para a HomePage.");
-    }
-
-    @When("Eu insiro o ID da Viagem que comprei")
-    public void eu_insiro_o_id_da_viagem_que_comprei() {
-        WebElement idInput = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input.token-input")));
-        idInput.clear();
-        idInput.sendKeys("2ad675cc-134c-41ab-9fb6-0e87ac4ea7c5");
-        log.info("ID da viagem inserido.");
-    }
-
-    @When("Eu clico em Procurar")
-    public void eu_clico_em_procurar() {
-        WebElement searchButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("button.search-btn")));
-        searchButton.click();
-        // Verifique se a ação de busca retornou o resultado esperado
-        log.info("Clicado no botão Procurar.");
     }
 
 
