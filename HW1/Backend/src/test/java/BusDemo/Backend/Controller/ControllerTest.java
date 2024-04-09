@@ -41,7 +41,23 @@ public class ControllerTest {
     @BeforeEach
     public void setUp() {
     }
+    
+    @Test
+    public void testCriarNewReservation() throws Exception {
+        Reservation reservation = new Reservation("02", "nome", "telefone", "endereco", "cidade", "cartaoCredito", "ViagemID");
 
+        when(reservationManager.criarReservation(any(Reservation.class))).thenReturn(reservation);
+
+        String reservationJson = "{\"clienteId\":\"02\",\"nome\":\"nome\",\"telefone\":\"telefone\",\"endereco\":\"endereco\",\"cidade\":\"cidade\",\"cartaoCredito\":\"cartaoCredito\",\"viagemId\":\"ViagemID\"}";
+
+        mvc.perform(post("/api/reservation")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(reservationJson))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.nome", is("nome")));
+
+        verify(reservationManager, times(1)).criarReservation(any(Reservation.class));
+    }
     @Test
     public void testBuscarViagens() throws Exception {
 
@@ -67,22 +83,6 @@ public class ControllerTest {
         verify(viagemManager, times(1)).buscarViagens("Lisboa", "Coimbra", "2024-04-24");
     }
     
-    @Test
-    public void testCriarNewReservation() throws Exception {
-        Reservation reservation = new Reservation("02", "nome", "telefone", "endereco", "cidade", "cartaoCredito", "ViagemID");
-
-        when(reservationManager.criarReservation(any(Reservation.class))).thenReturn(reservation);
-
-        String reservationJson = "{\"clienteId\":\"02\",\"nome\":\"nome\",\"telefone\":\"telefone\",\"endereco\":\"endereco\",\"cidade\":\"cidade\",\"cartaoCredito\":\"cartaoCredito\",\"viagemId\":\"ViagemID\"}";
-
-        mvc.perform(post("/api/reservation")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(reservationJson))
-                .andExpect(status().isCreated())
-                .andExpect(jsonPath("$.nome", is("nome")));
-
-        verify(reservationManager, times(1)).criarReservation(any(Reservation.class));
-    }
 
     @Test
     public void testGetReservationById() throws Exception {

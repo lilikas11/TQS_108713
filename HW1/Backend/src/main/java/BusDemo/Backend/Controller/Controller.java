@@ -21,6 +21,8 @@ import BusDemo.Backend.Service.ReservationManager;
 import BusDemo.Backend.Service.Viagem;
 import BusDemo.Backend.Service.ViagemManager;
 
+
+
 @RestController
 @RequestMapping("/api")
 public class Controller {

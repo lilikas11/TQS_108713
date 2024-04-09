@@ -79,7 +79,7 @@ public class BusDemoSteps {
         WebElement thirdButton = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("button:nth-child(3)")));
         thirdButton.click();
         log.info("Navegação para a seção de viagens foi clicada.");
-        assertThat(driver.getCurrentUrl(), containsString("/viagens")); // Assuma que a URL deve conter '/viagens' após clicar no botão.
+        assertThat(driver.getCurrentUrl(), containsString("/viagens")); 
     }
     
     @When("Eu seleciono {string} como minha cidade de origem")
